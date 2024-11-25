@@ -12,8 +12,14 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "yarn install"
+	"postCreateCommand": "yarn install",
+	// Use 'postStartCommand' to run commands after the container is started.
+	"postStartCommand": ". /workspace/gitconfig.env && git config --global user.name \"$GIT_USER\" && git config --global user.email \"$GIT_EMAIL\"",
 
+	// Mount the gitconfig.env file into the container
+	"mounts": [
+		"source=${localWorkspaceFolder}/gitconfig.env,target=/workspace/gitconfig.env,type=bind,consistency=cached"
+	]
 	// Configure tool-specific properties.
 	// "customizations": {},
 
